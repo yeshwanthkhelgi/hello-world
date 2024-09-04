@@ -1,0 +1,12 @@
+name: My Workflow
+on: [push,pull_request]
+jobs:  
+  build:    
+    runs-on: ubuntu-latest    
+    steps:      
+      - name: Checkout code        
+        uses: actions/checkout@v3      
+      - name: Source .bash_profile and run Ruby script        
+        run: |          
+          source ~/.bash_profile || source ~/.bashrc          
+          ruby my_script.rb
