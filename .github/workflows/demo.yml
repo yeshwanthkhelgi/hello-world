@@ -1,9 +1,11 @@
-name: Demo
+name: Demos
 
 on:
   pull_request:
     branches:
       - feature1
+      - feature2
+  workflow_dispatch:
       
 jobs:
 
@@ -25,7 +27,7 @@ jobs:
       - name: Branch used
         id: extract_branch
         run: |
-           if [["${GITHUB_EVENT_NAME}"=="pull request"]]; then
+           if [["${GITHUB_EVENT_NAME}"=="pull_request"]]; then
              echo "::set-output name=branch::$(echo ${GITHUB_REF#refs/*/})"
            fi
            
