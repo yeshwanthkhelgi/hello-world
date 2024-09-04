@@ -12,7 +12,7 @@ jobs:
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: List files in the repository
@@ -21,19 +21,12 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}."
       
       - name: Branch used
-        id: extract_branch
+        id: extract_pr_number
         run: |
            if [["${GITHUB_EVENT_NAME}"=="pull_request"]]; then
-            echo "::set-output name=branch::$(echo ${GITHUB_REF#refs/heads/})"
-           elif [["${GITHUB_EVENT_NAME}"=="pull_request"]]; then
-            echo "::set-output name=branch::$(echo ${GITHUB_BASE_REF)"
+             echo "::set-output name=pr_number::$(echo ${{github.event.pull_request.number}})"
            fi
            
-      - name: "Execute sonar scan"
-        run: ruby CICDScripts/sonar_parameter.rb
-        env:
-           Branch: ${{ steps.extract_branch.outputs.branch }}
-
-      
-             
-
+      - name: "Print pull request number"
+        run: |
+           echo "Pull Request Number: ${{ steps.extract_pr_number.outputs.pr_number}}"
