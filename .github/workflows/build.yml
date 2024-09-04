@@ -5,6 +5,8 @@ jobs:
     runs-on: ubuntu-latest    
     steps:      
       - name: Checkout code        
-        uses: actions/checkout@v3      
+        uses: actions/checkout@v3
+      - name: Make shell script executable
+        run: chmod +x ./CICDScripts/run_my_script.sh
       - name: Run Shell Script
         run: ./CICDScripts/run_my_script.sh
