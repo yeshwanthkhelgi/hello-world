@@ -26,11 +26,11 @@ jobs:
       - name: Branch used
         id: extract_branch
         run: |
-           echo "branch=$(echo ${GITHUB_REF#refs/*/})" >> $GITHUB_ENV
-           echo "::set-output name=branch::$(echo ${GITHUB_REF#refs/*/})"
+           echo "::set-output name=branch::$(echo $GITHUB_BASE_REF)"
 
       - name: "Print pull request number"
         run: ruby CICDScripts/sonar_parameter.rb
         env:
-           Branch: ${{ env.branch }}
+           Branch: ${{ steps.extract_branch.outputs.branch }}
+           Build_Number: ${{ github.run_number }}
            
