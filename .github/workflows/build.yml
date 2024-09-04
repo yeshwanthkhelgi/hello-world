@@ -6,7 +6,5 @@ jobs:
     steps:      
       - name: Checkout code        
         uses: actions/checkout@v3      
-      - name: Source .bash_profile and run Ruby script        
-        run: |          
-          bash -c "source ~/.bash_profile || source ~/.bashrc"          
-          ruby CICDScripts/my_script.rb
+      - name: Run Shell Script
+        run: ./CICDScripts/run_my_script.sh
