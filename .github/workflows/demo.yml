@@ -4,7 +4,6 @@ on:
   pull_request:
     branches:
       - feature1
-      - main
       
 jobs:
 
@@ -26,7 +25,7 @@ jobs:
       - name: Branch used
         id: extract_branch
         run: |
-           if [["${GITHUB_EVENT_NAME}"=="pull request"]]; then
+           if [["${GITHUB_EVENT_NAME}"=="pull_request"]]; then
              echo "::set-output name=branch::$(echo ${GITHUB_REF#refs/*/})"
            fi
            
