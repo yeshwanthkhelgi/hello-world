@@ -4,8 +4,10 @@ on:
   pull_request:
     branches:
       - feature1
+      
 jobs:
-  Explore-GitHub:
+
+  Tests:
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -21,12 +23,13 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}."
       
       - name: Branch used
-        id: extract_pr_number
+        id: extract_branch
         run: |
            if [["${GITHUB_EVENT_NAME}"=="pull request"]]; then
-             echo "::set-output name=pr_number::$(echo ${{github.event.pull_request.number}})"
+             echo "::set-output name=branch::$(echo ${GITHUB_REF#refs/*/})"
            fi
            
       - name: "Print pull request number"
-        run: |
-           echo "Pull Request Number: ${{ steps.extract_pr_number.outputs.pr_number}}"
+        run: ruby CICDScripts/sonar_parameter.rb
+        env:
+           Branch: ${{ steps.extract_branch.outputs.branch }}
