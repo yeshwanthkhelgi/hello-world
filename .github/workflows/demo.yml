@@ -1,8 +1,9 @@
 name: Demo
 
 on:
-  merge_group:
-  
+  pull_request:
+    branches:
+      - feature1
 jobs:
   Explore-GitHub:
     runs-on: ubuntu-latest
