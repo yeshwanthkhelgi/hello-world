@@ -9,4 +9,5 @@ jobs:
       - name: Make shell script executable
         run: chmod +x ./CICDScripts/run_my_script.sh
       - name: Run Shell Script
+        shell: bash
         run: ./CICDScripts/run_my_script.sh
