@@ -27,9 +27,8 @@ jobs:
       - name: Branch used
         id: extract_branch
         run: |
-           if [["${GITHUB_EVENT_NAME}"=="pull_request"]]; then
-             echo "::set-output name=branch::$(echo ${GITHUB_REF#refs/*/})"
-           fi
+           echo "::set-output name=branch::$(echo ${GITHUB_REF#refs/*/})"
+           
            
       - name: "Print pull request number"
         run: ruby CICDScripts/sonar_parameter.rb
