@@ -3,7 +3,7 @@ name: Demo
 on:
   pull_request:
     branches:
-      - feature2
+      - feature1
       
 jobs:
 
