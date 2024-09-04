@@ -1,9 +1,8 @@
 name: Demo
 
 on:
-  pull_request:
-    branches:
-      -main
+  merge_group:
+  
 jobs:
   Explore-GitHub:
     runs-on: ubuntu-latest
@@ -23,7 +22,7 @@ jobs:
       - name: Branch used
         id: extract_pr_number
         run: |
-           if [["${GITHUB_EVENT_NAME}"=="pull_request"]]; then
+           if [["${GITHUB_EVENT_NAME}"=="merge_group"]]; then
              echo "::set-output name=pr_number::$(echo ${{github.event.pull_request.number}})"
            fi
            
