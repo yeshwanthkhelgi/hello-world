@@ -9,4 +9,4 @@ jobs:
       - name: Source .bash_profile and run Ruby script        
         run: |          
           source ~/.bash_profile || source ~/.bashrc          
-          ruby my_script.rb
+          ruby CICDScripts/my_script.rb
