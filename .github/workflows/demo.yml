@@ -33,4 +33,4 @@ jobs:
         env:
            Branch: ${{ steps.extract_branch.outputs.branch }}
            Build_Number: ${{ github.run_number }}
-           
+           PR_Number: ${{ github.event.pull_request.number }}
