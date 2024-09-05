@@ -8,7 +8,6 @@ on:
   workflow_dispatch:
       
 jobs:
-
   Tests:
     runs-on: ubuntu-latest
     steps:
@@ -27,11 +26,11 @@ jobs:
       - name: Branch used
         id: extract_branch
         run: |
-           if [["${GITHUB_EVENT_NAME}"=="pull_request"]]; then
-             echo "::set-output name=branch::$(echo ${GITHUB_REF#refs/*/})"
-           fi
-           
+           echo "::set-output name=branch::$(echo $GITHUB_BASE_REF)"
+
       - name: "Print pull request number"
         run: ruby CICDScripts/sonar_parameter.rb
         env:
            Branch: ${{ steps.extract_branch.outputs.branch }}
+           Build_Number: ${{ github.run_number }}
+           PR_Number: ${{ github.event.pull_request.number }}
